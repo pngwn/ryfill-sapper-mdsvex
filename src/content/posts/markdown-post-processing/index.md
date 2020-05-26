@@ -1,0 +1,16 @@
+---
+title: Markdown Post Processing (MDX-ish)
+date: 2020-05-04
+---
+
+<script>
+  import Button from './button.svelte'
+</script>
+
+<span>this text is in a span</span>
+
+I want to be able to easily use custom components in my markdown, and have some native html elements automatically replaced.
+
+https://alexxnb.github.io/svelte-preprocess-markdown/
+
+<Button />

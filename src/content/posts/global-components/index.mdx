@@ -1,0 +1,6 @@
+---
+title: Global Components
+date: 2020-05-04
+---
+
+I want the ability to wrap my site in a header and footer that do not rerender between pages so I can do cool animations.

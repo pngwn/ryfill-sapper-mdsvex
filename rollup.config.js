@@ -6,6 +6,8 @@ import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
+import glob from 'rollup-plugin-glob'
+import { mdsvex } from "mdsvex";
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -25,13 +27,18 @@ export default {
 			svelte({
 				dev,
 				hydratable: true,
-				emitCss: true
+				emitCss: true,
+				extensions: [".svelte", ".md"],
+				preprocess: mdsvex({
+					extension: ".md"
+				})
 			}),
 			resolve({
 				browser: true,
 				dedupe: ['svelte']
 			}),
 			commonjs(),
+			glob(),
 
 			legacy && babel({
 				extensions: ['.js', '.mjs', '.html', '.svelte'],
@@ -69,12 +76,17 @@ export default {
 			}),
 			svelte({
 				generate: 'ssr',
-				dev
+				dev,
+				extensions: [".svelte", ".md"],
+				preprocess: mdsvex({
+					extension: ".md"
+				})
 			}),
 			resolve({
 				dedupe: ['svelte']
 			}),
-			commonjs()
+			commonjs(),
+			glob()
 		],
 		external: Object.keys(pkg.dependencies).concat(
 			require('module').builtinModules || Object.keys(process.binding('natives'))

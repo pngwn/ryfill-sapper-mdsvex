@@ -28,9 +28,9 @@ export default {
 				dev,
 				hydratable: true,
 				emitCss: true,
-				extensions: [".svelte", ".md"],
+				extensions: [".svelte", ".svx"],
 				preprocess: mdsvex({
-					extension: ".md"
+					extension: ".svx"
 				})
 			}),
 			resolve({
@@ -41,7 +41,7 @@ export default {
 			glob(),
 
 			legacy && babel({
-				extensions: ['.js', '.mjs', '.html', '.svelte'],
+				extensions: ['.js', '.mjs', '.html', '.svelte', '.svx'],
 				babelHelpers: 'runtime',
 				exclude: ['node_modules/@babel/**'],
 				presets: [
@@ -77,9 +77,9 @@ export default {
 			svelte({
 				generate: 'ssr',
 				dev,
-				extensions: [".svelte", ".md"],
+				extensions: [".svelte", ".svx"],
 				preprocess: mdsvex({
-					extension: ".md"
+					extension: ".svx"
 				})
 			}),
 			resolve({

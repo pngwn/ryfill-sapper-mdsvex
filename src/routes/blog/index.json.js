@@ -1,12 +1,13 @@
 import posts from './_posts.js';
 
-posts.map(post => console.log(post.render()))
-
 const contents = JSON.stringify(posts.map(post => {
+	console.log('trying to get frontmatter here', post.render())
 	return {
-		title: post.title,
-		slug: post.slug
+		title: '???'
+		// title: post.title,
+		// slug: post.slug
 	};
+	// return {...post.render()}
 }));
 
 export function get(req, res) {

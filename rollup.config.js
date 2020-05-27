@@ -15,6 +15,14 @@ const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
 const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
 
+import { readdirSync } from 'fs';
+import { join, extname } from 'path';
+
+function get_routes() {
+	const  blog_path = join(process.cwd(), 'src', 'routes', 'blog');
+	return readdirSync(blog_path).filter(p => extname(p) === "");
+}
+
 export default {
 	client: {
 		input: config.client.input(),
@@ -22,16 +30,15 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode)
+				'process.env.NODE_ENV': JSON.stringify(mode),
+				'__ROUTES__': JSON.stringify(get_routes())
 			}),
 			svelte({
 				dev,
 				hydratable: true,
 				emitCss: true,
 				extensions: [".svelte", ".svx"],
-				preprocess: mdsvex({
-					extension: ".svx"
-				})
+				preprocess: mdsvex()
 			}),
 			resolve({
 				browser: true,
@@ -72,15 +79,14 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': false,
-				'process.env.NODE_ENV': JSON.stringify(mode)
+				'process.env.NODE_ENV': JSON.stringify(mode),
+				'__ROUTES__': JSON.stringify(get_routes())
 			}),
 			svelte({
 				generate: 'ssr',
 				dev,
 				extensions: [".svelte", ".svx"],
-				preprocess: mdsvex({
-					extension: ".svx"
-				})
+				preprocess: mdsvex()
 			}),
 			resolve({
 				dedupe: ['svelte']

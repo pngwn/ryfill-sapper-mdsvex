@@ -4,7 +4,7 @@ date: 2020-05-04
 ---
 
 <script>
-  import Button from './button.svelte'
+  import Button from './_button.svelte'
 </script>
 
 <span>this text is in a span</span>

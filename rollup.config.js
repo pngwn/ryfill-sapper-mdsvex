@@ -38,7 +38,9 @@ export default {
 				hydratable: true,
 				emitCss: true,
 				extensions: [".svelte", ".svx"],
-				preprocess: mdsvex()
+				preprocess: mdsvex({ 
+					layout: join(process.cwd(), 'src/routes/_mdsvex_layout.svelte') 
+				})
 			}),
 			resolve({
 				browser: true,
@@ -86,7 +88,9 @@ export default {
 				generate: 'ssr',
 				dev,
 				extensions: [".svelte", ".svx"],
-				preprocess: mdsvex()
+				preprocess: mdsvex({ 
+					layout: join(process.cwd(), 'src/routes/_mdsvex_layout.svelte') 
+				})
 			}),
 			resolve({
 				dedupe: ['svelte']

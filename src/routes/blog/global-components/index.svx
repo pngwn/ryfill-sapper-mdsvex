@@ -1,5 +1,7 @@
 ---
 title: Global Components
+thingy: bijibooojiboo
+otherthingy: scandalicious
 date: 2020-05-04
 ---
 
